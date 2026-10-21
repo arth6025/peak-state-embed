@@ -1,0 +1,5 @@
+# peakst8 Embed
+
+> peakst8 Embed lets run clubs and fitness communities sell events on their own website. Event pages are server-rendered on the club's domain with Event and FAQ schema, so they rank on Google and get cited by AI answer engines. peakst8 runs checkout, payments, refunds and check-in.
+
+- [Product note](https://arth6025.github.io/peak-state-embed/): ICP, the problem, launch-to-scale path, SEO and AEO requirements, architecture, V1 scope, FAQ, open questions
