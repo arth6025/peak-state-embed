@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://arth6025.github.io/peak-state-embed/sitemap.xml
+Sitemap: https://arth6025.github.io/peakst8-embed/sitemap.xml
