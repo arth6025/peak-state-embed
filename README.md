@@ -14,7 +14,7 @@ The pilot starts with three organisers:
 | --- | --- | --- | --- |
 | **Find Your Fit** | Recurring community runs and sessions | Every run ranks on their own site; bookings without leaving it | 30 Nov 2026 |
 | **Sisters in Sweat** | Women's fitness community events | Their brand all the way through checkout; one place for all their events | 7 Dec 2026 |
-| **Cubbon Classic 10K** | A 10K race | A race page on their domain that ranks and gets quoted for "10K in Bengaluru" searches | 14 Dec 2026 |
+| **Cubbon Classic 10K** | A chip-timed 10K race with club entries (Edition 2, 21 Mar 2027) | A race page that ranks and gets quoted for "10K in Bengaluru" searches, plus club codes and bibs in peakst8 | 14 Dec 2026 |
 
 ## The problem
 
@@ -22,11 +22,23 @@ The pilot starts with three organisers:
 - **Iframe embeds are invisible.** Google credits the vendor, and AI crawlers, which mostly don't run JavaScript, see nothing.
 - **No attribution.** Clubs can't fire their GA4 or Meta pixel on a booking.
 
+## Case study: Cubbon Classic 10K today
+
+[cubbonclassic10k.com/register](https://cubbonclassic10k.com/register) is the setup Embed replaces:
+
+| Today | With peakst8 Embed |
+| --- | --- |
+| Individual entry is a KonfHub widget iframe inside the page | A server-rendered race page on their domain; peakst8 checkout opens on Book |
+| Structured data is an Organization and a WebPage only, with no Event markup | Event, FAQ and breadcrumb schema, sitemap and IndexNow |
+| Club captain submits a form; the code arrives 24–48 hours later; 10 runners minimum, 7 men + 3 women | Club codes issued on approval (O7); captain tracks the roster against the rule (C2); members join with the code (C3) |
+| Chip-timed entry with bibs | Bibs assigned on payment, frozen 7 days before the race, exported as CSV to the timing partner (O7) |
+
 ## What we're building
 
 1. **Hosted event pages** on the club's domain (`events.club.in`), server-rendered, with Event and FAQ schema, a sitemap, IndexNow pings, AI crawlers allowed and an `llms.txt`.
 2. **A listing block or Book button** for the club's main site, from one snippet.
 3. **One peakst8 checkout** that opens as a sheet over the club's page and sends booking events to the club's GA4 and pixel.
+4. **Race features** for the Cubbon pilot: club-code registration (captain registers, members join with a code, roster rules) and bib numbers with a CSV export to the timing partner. V1 doesn't integrate with timing hardware.
 
 Embed is switched on per organiser from peakst8 admin, so the pilot stays limited to these three.
 
@@ -41,6 +53,8 @@ Embed is switched on per organiser from peakst8 admin, so the pilot stays limite
 | ![O3 Choose scope](screens/O3-choose-scope.png) | ![O4 Brand](screens/O4-brand.png) |
 | **O5 · Domain and tracking** | **O6 · Install and SEO check** |
 | ![O5 Domain and tracking](screens/O5-domain-tracking.png) | ![O6 Install and SEO check](screens/O6-install-seo-check.png) |
+| **O7 · Clubs and bibs: club codes** | **O7 · Clubs and bibs: bibs and timing export** |
+| ![O7 Club codes](screens/O7-club-codes.png) | ![O7 Bibs and timing export](screens/O7-bibs-timing-export.png) |
 
 ### Attendee flow (on the club's site)
 
@@ -49,6 +63,12 @@ Embed is switched on per organiser from peakst8 admin, so the pilot stays limite
 | ![E1 Event page](screens/E1-event-page.png) | ![E2 Tickets](screens/E2-tickets.png) | ![E3 Details](screens/E3-details.png) |
 | **E4 · Phone OTP** | **E5 · Payment** | **E6 · Confirmation** |
 | ![E4 Phone OTP](screens/E4-otp.png) | ![E5 Payment](screens/E5-payment.png) | ![E6 Confirmation](screens/E6-confirmation.png) |
+
+### Club registration (race site, Cubbon pilot)
+
+| C1 · Captain registers club | C2 · Club code and roster | C3 · Member joins with code | C3 · Ticket with bib |
+| --- | --- | --- | --- |
+| ![C1 Captain registers club](screens/C1-captain-registers.png) | ![C2 Club code and roster](screens/C2-club-code-roster.png) | ![C3 Member joins with code](screens/C3-member-joins.png) | ![C3 Ticket with bib](screens/C3-ticket-with-bib.png) |
 
 ### peakst8 admin
 
@@ -68,7 +88,8 @@ gantt
   section Build
   Page renderer, schema, sitemap     :b1, 2026-11-02, 12d
   Checkout sheet and UPI hand-off    :b2, 2026-11-02, 12d
-  Dashboard O1–O6 and admin A1       :b3, 2026-11-09, 12d
+  Dashboard O1–O7 and admin A1       :b3, 2026-11-09, 12d
+  Club codes and bib export          :b4, 2026-11-09, 12d
   section Ship
   QA and staging with Find Your Fit  :c1, 2026-11-23, 5d
   Find Your Fit live                 :milestone, m1, 2026-11-30, 0d
@@ -82,9 +103,9 @@ gantt
 | Gate | Date | Passes when |
 | --- | --- | --- |
 | Scope lock | 30 Oct | Prototype signed off, real checkout screens matched, payment gateway confirms framed checkout and UPI hand-off |
-| Build complete | 20 Nov | All 13 screens built; SEO check passes 8 of 8 on staging |
+| Build complete | 20 Nov | All 17 screens built; SEO check passes 8 of 8 on staging; sample timing export accepted by Cubbon's timing partner |
 | First pilot live | 30 Nov | Find Your Fit takes a real order through Embed |
-| All pilots live | 14 Dec | All three organisers live, at least one order each |
+| All pilots live | 14 Dec | All three organisers live with at least one order each; a test club completes C1–C3 |
 | Go / no-go | 15 Jan 2027 | Embed share of pilot GMV, mobile Book-to-paid conversion, and organic plus AI-referred bookings reviewed |
 
 ## Open questions
@@ -99,6 +120,6 @@ gantt
 | Path | What it is |
 | --- | --- |
 | `index.html` | The product note, published on GitHub Pages |
-| `prototype/` | Clickable prototype of all 13 V1 screens |
+| `prototype/` | Clickable prototype of all 17 V1 screens |
 | `screens/` | Screenshots used in this README |
 | `robots.txt`, `sitemap.xml`, `llms.txt` | Search and AI crawler files for the site |

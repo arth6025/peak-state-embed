@@ -83,7 +83,7 @@ footer a{color:var(--ink-2)}
   <h1>Club event pages that rank, get cited, and sell.</h1>
   <p>peakst8 Embed puts a club's events and the full peakst8 booking flow on the club's own website. Pages are built for Google and AI answer engines on the club's domain; checkout, payments and the GMV take stay with peakst8.</p>
   <div class="facts"><span>ICP · community fitness clubs</span><span>SEO + AEO by default</span><span>Live in &lt; 10 min</span><span>Pilot live · 30 Nov 2026</span></div>
-  <nav class="toc" aria-label="Sections"><a href="#icp">ICP</a><a href="#problem">Problem</a><a href="#scale">Launch → scale</a><a href="#seo-aeo">SEO + AEO</a><a href="#how">How it works</a><a href="#scope">Scope</a><a href="#faq">FAQ</a><a href="#timeline">Timeline</a><a href="#open">Open questions</a><a href="prototype/" style="background:var(--ink);color:#fff">Prototype →</a></nav>
+  <nav class="toc" aria-label="Sections"><a href="#icp">ICP</a><a href="#problem">Problem</a><a href="#case">Case study</a><a href="#scale">Launch → scale</a><a href="#seo-aeo">SEO + AEO</a><a href="#how">How it works</a><a href="#scope">Scope</a><a href="#faq">FAQ</a><a href="#timeline">Timeline</a><a href="#open">Open questions</a><a href="prototype/" style="background:var(--ink);color:#fff">Prototype →</a></nav>
 </section>
 
 <article class="pr">
@@ -101,7 +101,7 @@ footer a{color:var(--ink-2)}
     <tr><td>Decider · user</td><td>Founder or community lead decides; an ops lead or volunteer sets it up; members book</td></tr>
   </tbody>
 </table></div>
-<p><b>Not for V1:</b> large timed races that need bib and timing integrations, and organisers without a website.</p>
+<p><b>Not for V1:</b> direct integrations with timing hardware (V1 assigns bibs and exports runners to the timing partner instead), and organisers without a website.</p>
 
 <h2 id="problem">The problem</h2>
 <ul>
@@ -109,6 +109,19 @@ footer a{color:var(--ink-2)}
   <li><b>Iframe embeds are invisible.</b> Tools like <a href="https://blog.konfhub.com/simplify-event-registrations-with-konfhubs-embed-ticket-feature" target="_blank" rel="noopener">KonfHub's embed</a> drop an iframe; Google credits the vendor, and AI crawlers, which mostly don't run JavaScript, see nothing.</li>
   <li><b>No attribution.</b> Clubs can't fire their Meta pixel or GA4 on a booking, so they can't tell which posts and ads sell.</li>
 </ul>
+
+<h2 id="case">Case study: Cubbon Classic 10K today</h2>
+<p class="answer">Cubbon Classic 10K sells Edition 2 (21 March 2027, Kanteerava Stadium, Gate A) through a KonfHub iframe on its own register page, which is exactly the setup Embed replaces.</p>
+<div class="tbl"><table>
+  <thead><tr><th>Today on <a href="https://cubbonclassic10k.com/register" target="_blank" rel="noopener">cubbonclassic10k.com/register</a></th><th>With peakst8 Embed</th></tr></thead>
+  <tbody>
+    <tr><td>Individual entry is a KonfHub widget iframe inside the page</td><td>A server-rendered race page on their domain; peakst8 checkout opens only on Book</td></tr>
+    <tr><td>Structured data is an Organization and a WebPage only, with no Event markup, so date, venue and price aren't machine-readable</td><td><code>Event</code>, <code>FAQPage</code> and <code>BreadcrumbList</code> schema, sitemap and IndexNow, so the race can be ranked and quoted</td></tr>
+    <tr><td>Clubs: the captain submits a form, the code arrives 24–48 hours later, members register separately; minimum 10 runners, 7 men + 3 women</td><td>Club codes in V1: the captain registers (C1), the code is issued on approval in O7, members join with it (C3), and the captain tracks the roster against the rule (C2)</td></tr>
+    <tr><td>Timed entry with chip timing and bibs</td><td>Bibs assigned on payment from set ranges, frozen 7 days before the race, and exported as CSV to the timing partner (O7)</td></tr>
+    <tr><td>Fee not announced yet</td><td>Go-live 14 Dec 2026 leaves about three months of sales before race day</td></tr>
+  </tbody>
+</table></div>
 
 <h2 id="scale">How peakst8 helps them launch, grow and scale</h2>
 <div class="stages">
@@ -188,14 +201,15 @@ footer a{color:var(--ink-2)}
 </ul>
 
 <h2 id="scope">V1 scope</h2>
-<p><b>See every screen:</b> the <a href="prototype/">clickable prototype</a> has A1, O1–O6 and E1–E6, with their states and build notes.</p>
+<p><b>See every screen:</b> the <a href="prototype/">clickable prototype</a> has A1, O1–O7, E1–E6 and C1–C3, with their states and build notes.</p>
 <div class="tbl"><table>
   <thead><tr><th>Surface</th><th>Screens</th></tr></thead>
   <tbody>
     <tr><td>peakst8 admin</td><td>A1 Embed access: on/off, allowed modes, domains, fee override</td></tr>
     <tr><td>Organiser dashboard</td><td>O1 Embeds home (views, orders, GMV) · O2 Choose mode · O3 Scope (event, series, all) · O4 Brand (colour, font, layout) · O5 Domain and tracking (subdomain, GA4, pixel, webhook) · O6 Install and SEO check (schema valid, indexed, sitemap submitted)</td></tr>
     <tr><td>Attendee</td><td>E1 Event page or listing · E2 Tickets · E3 Details · E4 OTP · E5 Payment · E6 Confirmation and QR ticket</td></tr>
-    <tr><td>Backend</td><td><code>organiser_embed_settings</code> (enabled, modes, domains, fee override, tracking IDs, webhook) · <code>embeds</code> (mode, scope, theme, status) · orders gain <code>source</code>, <code>embed_id</code>, <code>utm</code></td></tr>
+    <tr><td>Race features (Cubbon pilot)</td><td>A1 race toggles · O7 Clubs and bibs (club rules, approvals, codes, bib ranges, freeze date, timing export) · C1 Captain registers club · C2 Club code and roster · C3 Member joins with code, ticket with bib</td></tr>
+    <tr><td>Backend</td><td><code>organiser_embed_settings</code> (enabled, modes, domains, fee override, tracking IDs, webhook) · <code>embeds</code> (mode, scope, theme, status) · orders gain <code>source</code>, <code>embed_id</code>, <code>utm</code> · <code>clubs</code> (code, captain, rules, status) · <code>club_members</code> · <code>bibs</code> (range, number, order, frozen)</td></tr>
   </tbody>
 </table></div>
 <p><b>Metrics:</b> share of pilot GMV through Embed, Book-to-paid conversion on mobile, organic and AI-referred bookings, and time from switch-on to first order.</p>
@@ -206,11 +220,11 @@ footer a{color:var(--ink-2)}
   <thead><tr><th>When</th><th>Milestone</th><th>Passes when</th></tr></thead>
   <tbody>
     <tr><td>22–30 Oct</td><td>Scope lock</td><td>Prototype signed off, real checkout screens matched, payment gateway confirms framed checkout and UPI hand-off</td></tr>
-    <tr><td>2–20 Nov</td><td>Build</td><td>Page renderer and schema, checkout sheet, dashboard O1–O6 and admin A1 built; SEO check 8 of 8 on staging</td></tr>
+    <tr><td>2–20 Nov</td><td>Build</td><td>Page renderer and schema, checkout sheet, dashboard O1–O7, admin A1, club codes and bib export built; SEO check 8 of 8 on staging</td></tr>
     <tr><td>23–27 Nov</td><td>QA and staging</td><td>Find Your Fit's pages and checkout tested end to end on staging</td></tr>
     <tr><td>30 Nov</td><td>Find Your Fit live</td><td>First real order through Embed</td></tr>
     <tr><td>7 Dec</td><td>Sisters in Sweat live</td><td>At least one order through Embed</td></tr>
-    <tr><td>14 Dec</td><td>Cubbon Classic 10K live</td><td>Race page live and indexed; at least one order</td></tr>
+    <tr><td>14 Dec</td><td>Cubbon Classic 10K live</td><td>Race page live and indexed; a test club completes C1–C3; timing partner accepts a sample export</td></tr>
     <tr><td>15 Jan 2027</td><td>Go / no-go for all organisers</td><td>Embed share of pilot GMV, mobile Book-to-paid conversion, organic and AI-referred bookings reviewed</td></tr>
   </tbody>
 </table></div>
