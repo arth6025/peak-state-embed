@@ -1,6 +1,6 @@
 # peak-state-embed (moved)
 
-This repo only redirects the old address. peakst8 Embed now lives at:
+This repo only redirects the old address. peakst8 Embed now lives in the peakst8 product notes:
 
-- Site: https://arth6025.github.io/peakst8-embed/
-- Repo: https://github.com/arth6025/peakst8-embed
+- Site: https://peakst8-basecamp.github.io/product-notes/embed/
+- Repo: https://github.com/peakst8-Basecamp/product-notes
